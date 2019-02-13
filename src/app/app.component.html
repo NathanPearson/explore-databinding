@@ -5,12 +5,12 @@
   <hr>
   <div class="row">
     <div class="col-12">
-      <button class="btn btn-primary" (click)="onChangeFirst()">Change First Element</button>
-      <button class="btn btn-danger" (click)="onDestroyFirst()">Destroy Element</button>
+      <button class="btn btn-primary mr-1 mb-2" (click)="onChangeFirst()">Change First Element</button>
+      <button class="btn btn-danger mb-2" (click)="onDestroyFirst()">Destroy Element</button>
       <app-server-element 
         *ngFor="let serverElement of serverElements"
         [srvElement]="serverElement">
-        <p>
+        <p #contentParagraph>
           <strong *ngIf="serverElement.type === 'server'" style="color: red">{{ serverElement.content }}</strong>
           <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
         </p>

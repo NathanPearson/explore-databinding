@@ -9,7 +9,10 @@ import {
   AfterContentChecked,
   AfterViewChecked,
   AfterViewInit,
-  OnDestroy} from '@angular/core';
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  ContentChild} from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -18,7 +21,7 @@ import {
 })
 
 // demo the lifecycle events of angular
-export class ServerElementComponent implements OnInit, 
+export class ServerElementComponent implements OnInit,
   OnChanges,
   DoCheck,
   AfterContentInit,
@@ -27,7 +30,11 @@ export class ServerElementComponent implements OnInit,
   AfterViewInit,
   OnDestroy {
 
-  @Input('srvElement') element: {type: string, name: string, content: string};
+  @Input('srvElement') element: { type: string, name: string, content: string };
+  @Input() name: string;
+  @ViewChild('heading') header: ElementRef;
+  @ContentChild('contentParagraph') paragraph: ElementRef;
+
 
   constructor() {
     console.log('constructor called!');
@@ -50,6 +57,7 @@ export class ServerElementComponent implements OnInit,
     // Called after ngOnInit when the component's or directive's content has been initialized.
     // Add 'implements AfterContentInit' to the class.
     console.log('afterContentInit');
+    console.log('Paragraph Content: ' + this.paragraph.nativeElement.textContent);
   }
 
   ngAfterContentChecked() {
@@ -58,6 +66,7 @@ export class ServerElementComponent implements OnInit,
 
   ngAfterViewInit(): void {
     console.log('afterviewinit');
+    console.log('Text Content: ' + this.header.nativeElement.textContent);
   }
 
   ngAfterViewChecked(): void {
